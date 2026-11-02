@@ -1,0 +1,176 @@
+
+/* IPL 2026 Ticket Booking Website */
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #071b45;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    color: orange;
+}
+
+/* Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: orange;
+}
+
+/* Sections */
+section {
+    padding: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+section h2 {
+    color: #071b45;
+}
+
+/* IPL Image */
+section img {
+    width: 80%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Forms */
+form {
+    background-color: white;
+    padding: 25px;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 8px;
+    text-align: left;
+}
+
+/* Input and Select */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+button {
+    background-color: orange;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #071b45;
+    color: white;
+}
+
+/* Match Details */
+#matchDetails {
+    color: #071b45;
+    font-weight: bold;
+}
+
+/* Match Schedule */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th {
+    background-color: #071b45;
+    color: white;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding: 12px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #e6eaf2;
+}
+
+/* Guidelines */
+#guidelines {
+    text-align: left;
+}
+
+#guidelines h2 {
+    text-align: center;
+}
+
+#guidelines h3 {
+    color: #071b45;
+}
+
+/* Footer */
+footer {
+    background-color: #071b45;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Mobile View */
+@media screen and (max-width: 600px) {
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    nav ul li {
+        margin: 8px;
+    }
+
+    section {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    section img {
+        width: 100%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+}
