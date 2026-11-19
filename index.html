@@ -3,82 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IPL Ticket Booking Portal</title>
+    <title>IPL Match Schedule</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
         background-color: #f4f6fb;
+        margin: 0;
+        padding: 24px;
         color: #0f172a;
       }
 
-      header {
-        background-color: #1d4ed8;
-        color: #ffffff;
-        padding: 16px 24px;
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .match-card {
+        background: #ffffff;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
 
-      header h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-
-      nav a {
-        color: #ffffff;
-        text-decoration: none;
-        margin-left: 16px;
-        font-weight: bold;
-      }
-
-      nav a:hover {
-        text-decoration: underline;
-      }
-
-      .hero {
-        max-width: 720px;
-        margin: 60px auto;
-        background: #ffffff;
-        padding: 36px;
-        border-radius: 8px;
-        text-align: center;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .cta-btn {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 24px;
+      .book-btn {
+        padding: 9px 16px;
         background-color: #2563eb;
         color: #ffffff;
-        text-decoration: none;
+        border: none;
         border-radius: 5px;
         font-weight: bold;
+        cursor: pointer;
       }
 
-      .cta-btn:hover {
+      .form-section {
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 8px;
+        margin-top: 40px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .form-group {
+        margin-bottom: 14px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 9px 11px;
+        border: 1px solid #cbd5e1;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        padding: 10px 18px;
         background-color: #1d4ed8;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>IPL Ticket Booking</h1>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="booking.html">Book Tickets</a>
-      </nav>
-    </header>
+    <div class="container">
+      <h1>IPL Match Schedule</h1>
 
-    <main class="hero">
-      <h2>Book Your IPL Match Tickets</h2>
-      <p>
-        Choose your favorite match, select your stand, and book tickets easily.
-      </p>
-      <a class="cta-btn" href="booking.html">Go to Booking Form</a>
-    </main>
+      <div class="match-card">
+        <span>RCB vs CSK</span>
+        <button type="button" class="book-btn">Book</button>
+      </div>
+
+      <div class="match-card">
+        <span>MI vs KKR</span>
+        <button type="button" class="book-btn">Book</button>
+      </div>
+
+      <div class="match-card">
+        <span>DC vs SRH</span>
+        <button type="button" class="book-btn">Book</button>
+      </div>
+
+      <section class="form-section">
+        <h2>Booking Form</h2>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="match">Match</label>
+            <select id="match" name="match" required>
+              <option value="">-- Select Match --</option>
+              <option value="RCB vs CSK">RCB vs CSK</option>
+              <option value="MI vs KKR">MI vs KKR</option>
+              <option value="DC vs SRH">DC vs SRH</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tickets">Tickets</label>
+            <input
+              type="number"
+              id="tickets"
+              name="tickets"
+              min="1"
+              max="10"
+              value="1"
+              required
+            />
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
