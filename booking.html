@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IPL Ticket Booking</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6fb;
+        color: #0f172a;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .form-box {
+        max-width: 560px;
+        margin: 24px auto;
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .top-nav {
+        margin-bottom: 14px;
+        display: flex;
+        gap: 16px;
+      }
+
+      .top-nav a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .top-nav a:hover {
+        text-decoration: underline;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        font-size: 24px;
+      }
+
+      .field {
+        margin-bottom: 15px;
+      }
+
+      label.main-label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 9px 11px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        font-size: 15px;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #2563eb;
+      }
+
+      input:user-invalid,
+      select:user-invalid {
+        border-color: #dc2626;
+        background-color: #fef2f2;
+      }
+
+      .options label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+        font-weight: normal;
+        cursor: pointer;
+      }
+
+      .buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      button[type="submit"] {
+        background-color: #2563eb;
+        color: #ffffff;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #1d4ed8;
+      }
+
+      button[type="reset"] {
+        background-color: #e2e8f0;
+        color: #0f172a;
+      }
+
+      button[type="reset"]:hover {
+        background-color: #cbd5e1;
+      }
+
+      #result {
+        margin-top: 18px;
+        padding: 12px 14px;
+        background-color: #dcfce7;
+        border: 1px solid #22c55e;
+        color: #166534;
+        border-radius: 4px;
+        display: none;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-box">
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="booking.html">Book Tickets</a>
+      </nav>
+
+      <h1>IPL Ticket Booking Form</h1>
+
+      <form id="bookingForm">
+        <div class="field">
+          <label class="main-label" for="name">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required
+            minlength="3"
+            maxlength="50"
+          />
+        </div>
+
+        <div class="field">
+          <label class="main-label" for="email">Email Address *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="example@email.com"
+            required
+            maxlength="80"
+          />
+        </div>
+
+        <div class="field">
+          <label class="main-label" for="phone"
+            >Phone Number (10–15 digits) *</label
+          >
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="9876543210"
+            required
+            minlength="10"
+            maxlength="15"
+            pattern="[0-9]{10,15}"
+            title="Enter 10 to 15 digits"
+          />
+        </div>
+
+        <div class="field">
+          <label class="main-label" for="match">Match Selection *</label>
+          <select id="match" name="match" required>
+            <option value="">-- Select Match --</option>
+            <option value="RCB vs CSK">RCB vs CSK</option>
+            <option value="MI vs KKR">MI vs KKR</option>
+            <option value="DC vs SRH">DC vs SRH</option>
+            <option value="RR vs GT">RR vs GT</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="main-label" for="stand">Stand Category *</label>
+          <select id="stand" name="stand" required>
+            <option value="">-- Select Stand --</option>
+            <option value="General Stand">General Stand</option>
+            <option value="Pavilion Stand">Pavilion Stand</option>
+            <option value="Club House">Club House</option>
+            <option value="VIP Stand">VIP Stand</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="main-label" for="tickets"
+            >Number of Tickets (1 to 10) *</label
+          >
+          <input
+            type="number"
+            id="tickets"
+            name="tickets"
+            min="1"
+            max="10"
+            value="1"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="main-label">Ticket Delivery Mode *</label>
+          <div class="options">
+            <label>
+              <input
+                type="radio"
+                name="ticketType"
+                value="Digital Pass"
+                required
+              />
+              Digital Pass (QR)
+            </label>
+            <label>
+              <input type="radio" name="ticketType" value="Physical Ticket" />
+              Stadium Box Office Pickup
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="main-label">Extra Preferences</label>
+          <div class="options">
+            <label>
+              <input type="checkbox" name="extras" value="Parking Pass" />
+              Parking Pass
+            </label>
+            <label>
+              <input type="checkbox" name="extras" value="Snacks Combo" />
+              Food &amp; Snacks Combo
+            </label>
+            <label>
+              <input type="checkbox" name="agree" required />
+              I agree to the booking terms and stadium rules *
+            </label>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button type="submit">Submit</button>
+          <button type="reset" id="resetBtn">Reset</button>
+        </div>
+      </form>
+
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("bookingForm");
+      const result = document.getElementById("result");
+      const resetBtn = document.getElementById("resetBtn");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const match = document.getElementById("match").value;
+        const stand = document.getElementById("stand").value;
+        const tickets = document.getElementById("tickets").value;
+        const delivery = document.querySelector(
+          'input[name="ticketType"]:checked',
+        ).value;
+        const extras = Array.from(
+          document.querySelectorAll('input[name="extras"]:checked'),
+        ).map((el) => el.value);
+
+        result.style.display = "block";
+        result.innerHTML =
+          `<strong>Booking Confirmed!</strong><br>` +
+          `Name: ${name} (${email})<br>` +
+          `Match: ${match} | Stand: ${stand} | Tickets: ${tickets}<br>` +
+          `Delivery: ${delivery}${extras.length ? ` | Extras: ${extras.join(", ")}` : ""}`;
+      });
+
+      resetBtn.addEventListener("click", function () {
+        result.style.display = "none";
+        result.innerHTML = "";
+      });
+    </script>
+  </body>
+</html>
