@@ -1,3 +1,31 @@
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("navLinks");
+const teamFilter = document.getElementById("teamFilter");
+const viewToggle = document.getElementById("viewToggle");
+const matchGrid = document.getElementById("matchGrid");
+const matchCards = document.querySelectorAll(".match-card");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+teamFilter.addEventListener("change", () => {
+  const selectedTeam = teamFilter.value;
+
+  matchCards.forEach((card) => {
+    const teams = card.dataset.teams.split(",");
+    if (selectedTeam === "ALL" || teams.includes(selectedTeam)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+viewToggle.addEventListener("click", () => {
+  matchGrid.classList.toggle("list-view");
+});
+
 const matchSelect = document.getElementById("match");
 const standSelect = document.querySelector("#stand");
 const ticketsInput = document.getElementById("tickets");
@@ -49,3 +77,10 @@ function updateBookingSummary() {
 matchSelect.addEventListener("change", updateBookingSummary);
 standSelect.addEventListener("change", updateBookingSummary);
 ticketsInput.addEventListener("change", updateBookingSummary);
+const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  updateBookingSummary();
+  showToast("Booking form submitted!");
+});

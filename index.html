@@ -4,118 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IPL Match Schedule</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f6fb;
-        margin: 0;
-        padding: 24px;
-        color: #0f172a;
-      }
-
-      .container {
-        max-width: 720px;
-        margin: 0 auto;
-      }
-
-      .match-card {
-        background: #ffffff;
-        padding: 16px 20px;
-        border-radius: 8px;
-        margin-bottom: 14px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-
-      .book-btn {
-        padding: 9px 16px;
-        background-color: #2563eb;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .form-section,
-      .summary-section {
-        background: #ffffff;
-        padding: 24px;
-        border-radius: 8px;
-        margin-top: 28px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      }
-
-      .form-group {
-        margin-bottom: 14px;
-      }
-
-      label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
-      }
-
-      input,
-      select {
-        width: 100%;
-        padding: 9px 11px;
-        border: 1px solid #cbd5e1;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
-
-      button[type="submit"] {
-        padding: 10px 18px;
-        background-color: #1d4ed8;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .toast {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #0f172a;
-        color: #ffffff;
-        padding: 12px 18px;
-        border-radius: 6px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-        opacity: 0;
-        transition: opacity 0.25s ease;
-        pointer-events: none;
-      }
-
-      .toast.show {
-        opacity: 1;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>IPL Match Schedule</h1>
+    <header class="navbar">
+      <a href="#" class="logo">IPL 2026</a>
+      <button type="button" id="hamburger" class="hamburger">☰</button>
+      <nav id="navLinks" class="nav-links">
+        <a href="#schedule">Schedule</a>
+        <a href="#guidelines">Guidelines</a>
+        <a href="#booking">Booking</a>
+        <a href="#summary">Summary</a>
+      </nav>
+    </header>
 
-      <div class="match-card">
-        <span>RCB vs CSK</span>
-        <button type="button" class="book-btn">Book</button>
-      </div>
+    <main class="container">
+      <section id="schedule">
+        <div class="controls">
+          <select id="teamFilter">
+            <option value="ALL">All Teams</option>
+            <option value="RCB">RCB</option>
+            <option value="CSK">CSK</option>
+            <option value="MI">MI</option>
+            <option value="KKR">KKR</option>
+            <option value="DC">DC</option>
+            <option value="SRH">SRH</option>
+          </select>
+          <button type="button" id="viewToggle">Toggle List View</button>
+        </div>
 
-      <div class="match-card">
-        <span>MI vs KKR</span>
-        <button type="button" class="book-btn">Book</button>
-      </div>
+        <div id="matchGrid" class="match-grid">
+          <div class="match-card" data-teams="RCB,CSK">RCB vs CSK</div>
+          <div class="match-card" data-teams="MI,KKR">MI vs KKR</div>
+          <div class="match-card" data-teams="DC,SRH">DC vs SRH</div>
+        </div>
+      </section>
 
-      <div class="match-card">
-        <span>DC vs SRH</span>
-        <button type="button" class="book-btn">Book</button>
-      </div>
+      <section id="guidelines" class="guidelines-grid">
+        <div class="guideline-card">Carry a valid ID and digital ticket.</div>
+        <div class="guideline-card">
+          Outside food and bottles are not allowed.
+        </div>
+        <div class="guideline-card">
+          Follow stand seating instructions at all times.
+        </div>
+      </section>
 
-      <section class="form-section">
+      <section id="booking" class="box">
         <h2>Booking Form</h2>
         <form id="bookingForm">
           <div class="form-group">
@@ -132,18 +67,28 @@
             <label for="match">Match</label>
             <select id="match" name="match" required>
               <option value="" data-price="0">-- Select Match --</option>
-              <option value="RCB vs CSK" data-price="1200">RCB vs CSK (₹1,200)</option>
-              <option value="MI vs KKR" data-price="1000">MI vs KKR (₹1,000)</option>
-              <option value="DC vs SRH" data-price="800">DC vs SRH (₹800)</option>
+              <option value="RCB vs CSK" data-price="1200">
+                RCB vs CSK (₹1,200)
+              </option>
+              <option value="MI vs KKR" data-price="1000">
+                MI vs KKR (₹1,000)
+              </option>
+              <option value="DC vs SRH" data-price="800">
+                DC vs SRH (₹800)
+              </option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="stand">Stand Category</label>
             <select id="stand" name="stand" required>
-              <option value="" data-multiplier="0">-- Select Stand Category --</option>
+              <option value="" data-multiplier="0">
+                -- Select Stand Category --
+              </option>
               <option value="General" data-multiplier="1">General (1x)</option>
-              <option value="Pavilion" data-multiplier="1.8">Pavilion (1.8x)</option>
+              <option value="Pavilion" data-multiplier="1.8">
+                Pavilion (1.8x)
+              </option>
               <option value="VIP" data-multiplier="3">VIP (3x)</option>
             </select>
           </div>
@@ -165,14 +110,19 @@
         </form>
       </section>
 
-      <section id="bookingSummary" class="summary-section">
+      <section id="summary" class="box">
         <h2>Booking Summary</h2>
-        <p><strong>Match:</strong> <span id="summaryMatch">Not selected</span></p>
-        <p><strong>Stand Category:</strong> <span id="summaryStand">Not selected</span></p>
+        <p>
+          <strong>Match:</strong> <span id="summaryMatch">Not selected</span>
+        </p>
+        <p>
+          <strong>Stand Category:</strong>
+          <span id="summaryStand">Not selected</span>
+        </p>
         <p><strong>Tickets:</strong> <span id="summaryTickets">1</span></p>
         <p><strong>Total Price:</strong> ₹<span id="summaryTotal">0</span></p>
       </section>
-    </div>
+    </main>
 
     <div id="toast" class="toast"></div>
 
