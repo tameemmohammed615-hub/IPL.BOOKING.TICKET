@@ -1,49 +1,51 @@
-function showToast(message) {
-  let toast = document.getElementById("toast");
+const matchSelect = document.getElementById("match");
+const standSelect = document.querySelector("#stand");
+const ticketsInput = document.getElementById("tickets");
 
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "toast";
-    toast.style.position = "fixed";
-    toast.style.bottom = "20px";
-    toast.style.right = "20px";
-    toast.style.padding = "12px 18px";
-    toast.style.backgroundColor = "#1d4ed8";
-    toast.style.color = "#ffffff";
-    toast.style.borderRadius = "6px";
-    toast.style.fontFamily = "Arial, sans-serif";
-    toast.style.fontSize = "14px";
-    toast.style.zIndex = "1000";
-    toast.style.display = "none";
-    document.body.appendChild(toast);
+const summaryMatch = document.getElementById("summaryMatch");
+const summaryStand = document.querySelector("#summaryStand");
+const summaryTickets = document.getElementById("summaryTickets");
+const summaryTotal = document.getElementById("summaryTotal");
+const toastEl = document.getElementById("toast");
+
+let toastTimeout = null;
+
+function showToast(message) {
+  toastEl.textContent = message;
+  toastEl.classList.add("show");
+
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
   }
 
-  toast.textContent = message;
-  toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 3000);
+  toastTimeout = setTimeout(() => {
+    toastEl.classList.remove("show");
+  }, 2500);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const bookButtons = document.querySelectorAll(".book-btn");
-  const bookingForm = document.getElementById("bookingForm");
+function updateBookingSummary() {
+  const selectedMatch = matchSelect.options[matchSelect.selectedIndex];
+  const selectedStand = standSelect.options[standSelect.selectedIndex];
 
-  bookButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (bookingForm) {
-        bookingForm.scrollIntoView({ behavior: "smooth" });
-      }
-      showToast("Scrolled to the booking form!");
-    });
-  });
+  const matchValue = matchSelect.value || "Not selected";
+  const standValue = standSelect.value || "Not selected";
+  const quantity = Math.max(1, parseInt(ticketsInput.value, 10) || 1);
 
-  if (bookingForm) {
-    bookingForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      showToast("Booking submitted!");
-    });
-  }
-});
+  const basePrice = Number(selectedMatch?.dataset.price || 0);
+  const multiplier = Number(selectedStand?.dataset.multiplier || 0);
+  const totalPrice =
+    matchSelect.value && standSelect.value
+      ? Math.round(basePrice * multiplier * quantity)
+      : 0;
+
+  summaryMatch.textContent = matchValue;
+  summaryStand.textContent = standValue;
+  summaryTickets.textContent = quantity;
+  summaryTotal.textContent = totalPrice;
+
+  showToast("Booking Summary updated!");
+}
+
+matchSelect.addEventListener("change", updateBookingSummary);
+standSelect.addEventListener("change", updateBookingSummary);
+ticketsInput.addEventListener("change", updateBookingSummary);
